@@ -3289,7 +3289,8 @@ module FittingFormula
   real(dl),parameter :: kmax = 10.0;
   real(dl),parameter :: zmin = 0.0;
   real(dl),parameter :: zmax = 3.0;
-  real(dl),parameter :: fR0min = 1e-7;
+  ! old: real(dl),parameter :: fR0min = 1e-7;
+  real(dl),parameter :: fR0min = 1e-10;
   real(dl),parameter :: fR0max = 1e-4;
 
 contains
@@ -3360,17 +3361,17 @@ contains
     !==============================================================
     ! The best-fit parameters for the range 1e-7 < fR0 < 5e-6
     !==============================================================
-    ratio_low  = ratio_by_param( log(fR0 / fR0_low ) , a-1 , k, param_low );
+    ratio_low  = ratio_by_param( log10(fR0 / fR0_low ) , a-1 , k, param_low );
 
     !==============================================================
     ! The best-fit parameters for the range 5e-6 < fR0 < 5e-5
     !==============================================================
-    ratio_mid  = ratio_by_param( log(fR0 / fR0_mid ) , a-1 , k, param_mid );
+    ratio_mid  = ratio_by_param( log10(fR0 / fR0_mid ) , a-1 , k, param_mid );
 
     !==============================================================
     ! The best-fit parameters for the range 1e-5 < fR0 < 1e-4
     !==============================================================
-    ratio_high = ratio_by_param( log(fR0 / fR0_high) , a-1 , k, param_high);
+    ratio_high = ratio_by_param( log10(fR0 / fR0_high) , a-1 , k, param_high);
 
     if(fR0 > 5e-5) then
       pofk_enhancement = ratio_high
